@@ -142,82 +142,104 @@ function writePassword() {
 
     password = '';
     
-    password = tryPassword();
+    password = confirmPassword();
     
-    function tryPassword(){
-      var passwordTest = '';
-      for(i = 0; i <= passwordLength; i++) {
-        charStringLength = combinedCharSet.length;
-        charStart = Math.floor((Math.random() * charStringLength) + 1);
-        charEnd = charStart + 1;
-        randomCharacter = combinedCharSet.substring(charStart, charEnd);
-        passwordTest = passwordTest + randomCharacter;
+    function confirmPassword() {
+    
+      password = tryPassword();
+      
+      function tryPassword(){
+        var passwordTest = '';
+        for(i = 0; i <= passwordLength; i++) {
+          charStringLength = combinedCharSet.length;
+          charStart = Math.floor((Math.random() * charStringLength) + 1);
+          charEnd = charStart + 1;
+          randomCharacter = combinedCharSet.substring(charStart, charEnd);
+          passwordTest = passwordTest + randomCharacter;
+        }
+        return passwordTest;
       }
-      return passwordTest;
+
+      if (lowercase === 'yes') {
+        var passwordLowercase = 0;
+        for (i = 1; i < lowercaseCharacters.length; i++) {
+          charStop = i + 1;
+          charCheck = lowercaseCharacters.substring(i, charStop);
+          passwordLowercase += password.indexOf(charCheck);
+        }
+
+        lowercaseNegative = -25;
+        console.log("lowerCaseNegative: " + lowercaseNegative);
+        console.log("passwordLowerCase: " + passwordLowercase);
+
+
+        if (passwordLowercase === lowercaseNegative) {
+          console.log("No lower case;");
+          confirmPassword();
+        }
+      }
+
+      if (uppercase === 'yes') {
+        var passwordUppercase = 0;
+        for (i = 1; i < uppercaseCharacters.length; i++) {
+          charStop = i + 1;
+          charCheck = uppercaseCharacters.substring(i, charStop);
+          passwordUppercase += password.indexOf(charCheck);
+        }
+
+        uppercaseNegative = -25;
+        console.log("uppercaseNegative: " + uppercaseNegative);
+        console.log("passwordUppercase: " + passwordUppercase);
+
+
+        if (passwordUppercase === uppercaseNegative) {
+          console.log("No lower case;");
+          confirmPassword();
+        }
+      }
+
+
+      if (numeric === 'yes') {
+        var passwordNumeric = 0;
+        for (i = 1; i < numericCharacters.length; i++) {
+          charStop = i + 1;
+          charCheck = numericCharacters.substring(i, charStop);
+          passwordNumeric += password.indexOf(charCheck);
+        }
+
+        numericNegative = -9;
+        console.log("numericNegative: " + numericNegative);
+        console.log("passwordNumeric: " + passwordNumeric);
+
+
+        if (passwordNumeric === numericNegative) {
+          console.log("No numeric characters;");
+          confirmPassword();
+        }
+      }
+
+
+      if (special === 'yes') {
+        var passwordSpecial = 0;
+        for (i = 1; i < specialCharacters.length; i++) {
+          charStop = i + 1;
+          charCheck = specialCharacters.substring(i, charStop);
+          passwordSpecial += password.indexOf(charCheck);
+        }
+
+        specialNegative = -29;
+        console.log("specialNegative: " + specialNegative);
+        console.log("passwordSpecial: " + passwordSpecial);
+
+
+        if (passwordSpecial === specialNegative) {
+          console.log("No special characters;");
+          confirmPassword();
+        }
+      }
+      return password;
     }
-
-    if (lowercase === 'yes') {
-      var passwordLowercase = 0;
-      for (i = 1; i < lowercaseCharacters.length; i++) {
-        charStop = i + 1;
-        charCheck = lowercaseCharacters.substring(i, charStop);
-        passwordLowercase += password.indexOf(charCheck);
-      }
-
-      lowercaseNegative = -Math.abs(lowercaseCharacters.length);
-      console.log("lowerCaseNegative: " + lowercaseNegative);
-      console.log("passwordLowerCase: " + passwordLowercase);
-
-
-      if (passwordLowercase === lowercaseNegative) {
-        console.log("No lower case;");
-        tryPassword();
-      }
-    }
-
-    if (uppercase === 'yes') {
-      var passwordUppercase = 0;
-      for (i = 1; i < uppercaseCharacters.length; i++) {
-        charStop = i + 1;
-        charCheck = uppercaseCharacters.substring(i, charStop);
-        passwordUppercase += password.indexOf(charCheck);
-      }
-
-      uppercaseNegative = -Math.abs(uppercaseCharacters.length);
-      console.log("uppercaseNegative: " + uppercaseNegative);
-      console.log("passwordUppercase: " + passwordUppercase);
-
-
-      if (passwordUppercase === uppercaseNegative) {
-        console.log("No lower case;");
-        tryPassword();
-      }
-    }
-
-
-    if (numeric === 'yes') {
-      var passwordNumeric = 0;
-      for (i = 1; i < numericCharacters.length; i++) {
-        charStop = i + 1;
-        charCheck = numericCharacters.substring(i, charStop);
-        passwordNumeric += password.indexOf(charCheck);
-      }
-
-      numericNegative = -Math.abs(numericCharacters.length);
-      console.log("numericNegative: " + numericNegative);
-      console.log("passwordNumeric: " + passwordNumeric);
-
-
-      if (passwordNumeric === numericNegative) {
-        console.log("No numeric characters;");
-        tryPassword();
-      }
-    }
-
-
-
     return password;
-
   }
 
 }
