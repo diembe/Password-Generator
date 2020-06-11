@@ -10,6 +10,7 @@ function writePassword() {
 
   function generatePassword() {
 
+    // Possible character sets to use
     var lowercaseCharacters = 'abcdefghijklmnopqrstuvwxyz';
     var uppercaseCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var numericCharacters = '0123456789';
@@ -19,6 +20,16 @@ function writePassword() {
     // Function to get the password length
     function getLength() {
       var pLength = prompt("How long would you like your password to be? (must be between 8 and 128 characters)");
+
+      /* Tried to add additional validation, but couldn't get it working quite yet.*/
+
+      //pLength = parseInt(pLength); 
+
+      //if (!Number.isInteger(pLength)) {
+      //  alert("Please enter only a number 8 through 128");
+      //  getLength();
+      //}
+
       if (pLength < 8 || pLength > 128) {
         alert("Sorry, your password must be between 8 and 128 characters.");
         getLength();
@@ -28,7 +39,7 @@ function writePassword() {
     }
 
     var passwordLength = getLength();
-    console.log(passwordLength);
+    console.log("Password length: " + passwordLength);
 
     // Yes/No for Lowercase
     function chooseLowercase() {
@@ -49,7 +60,7 @@ function writePassword() {
 
     var lowercase = chooseLowercase();
     lowercase = lowercase.toLowerCase();
-    console.log(lowercase);
+    console.log("Include lowercase characters? " + lowercase);
 
     // Yes/No for Uppercase
     function chooseUppercase() {
@@ -70,7 +81,7 @@ function writePassword() {
 
     var uppercase = chooseUppercase();
     uppercase = uppercase.toLowerCase();
-    console.log(uppercase);
+    console.log("Include uppercase characters? " + uppercase);
 
     // Yes/No for Numeric Characters
     function chooseNumeric() {
@@ -91,7 +102,7 @@ function writePassword() {
 
     var numeric = chooseNumeric();
     numeric = numeric.toLowerCase();
-    console.log(numeric);
+    console.log("Include numeric characters? " + numeric);
 
 
     // Yes/No for Special Characters
@@ -113,13 +124,15 @@ function writePassword() {
 
     var special = chooseSpecial();
     special = special.toLowerCase();
-    console.log(special);
+    console.log("Include special characters? " + special);
 
+    // Check to make sure at least one character set was chosen
     if (lowercase === 'no' && uppercase === 'no' && numeric === 'no' && special === 'no') {
       alert("Please choose at least one character type");
       generatePassword();
     }
 
+    // Create one string by concatenating the different char sets that were chosen
     var combinedCharSet = '';
 
     if (lowercase === 'yes') {
@@ -138,7 +151,7 @@ function writePassword() {
       combinedCharSet = combinedCharSet + specialCharacters;
     }
 
-    console.log(combinedCharSet);
+    console.log("Full character set being used: " + combinedCharSet);
 
     password = '';
     
@@ -148,6 +161,8 @@ function writePassword() {
     
       password = tryPassword();
       
+      // Create a password. Add one character at a time to the password until reaching the password length.
+      // For each character, choose one character randomly from the generated char set string
       function tryPassword(){
         var passwordTest = '';
         for(i = 0; i <= passwordLength; i++) {
@@ -160,6 +175,8 @@ function writePassword() {
         return passwordTest;
       }
 
+      // Validation to make sure that if a char set was chosen, there's at least one character from 
+      // the set included in the generated password. If not, go back up and create a new password.
       if (lowercase === 'yes') {
         var passwordLowercase = 0;
         for (i = 1; i < lowercaseCharacters.length; i++) {
@@ -169,8 +186,8 @@ function writePassword() {
         }
 
         lowercaseNegative = -25;
-        console.log("lowerCaseNegative: " + lowercaseNegative);
-        console.log("passwordLowerCase: " + passwordLowercase);
+        //console.log("lowerCaseNegative: " + lowercaseNegative);
+        //console.log("passwordLowerCase: " + passwordLowercase);
 
 
         if (passwordLowercase === lowercaseNegative) {
@@ -188,8 +205,8 @@ function writePassword() {
         }
 
         uppercaseNegative = -25;
-        console.log("uppercaseNegative: " + uppercaseNegative);
-        console.log("passwordUppercase: " + passwordUppercase);
+        //console.log("uppercaseNegative: " + uppercaseNegative);
+        //console.log("passwordUppercase: " + passwordUppercase);
 
 
         if (passwordUppercase === uppercaseNegative) {
@@ -208,8 +225,8 @@ function writePassword() {
         }
 
         numericNegative = -9;
-        console.log("numericNegative: " + numericNegative);
-        console.log("passwordNumeric: " + passwordNumeric);
+        //console.log("numericNegative: " + numericNegative);
+        //console.log("passwordNumeric: " + passwordNumeric);
 
 
         if (passwordNumeric === numericNegative) {
@@ -228,8 +245,8 @@ function writePassword() {
         }
 
         specialNegative = -29;
-        console.log("specialNegative: " + specialNegative);
-        console.log("passwordSpecial: " + passwordSpecial);
+        //console.log("specialNegative: " + specialNegative);
+        //console.log("passwordSpecial: " + passwordSpecial);
 
 
         if (passwordSpecial === specialNegative) {
@@ -237,6 +254,7 @@ function writePassword() {
           confirmPassword();
         }
       }
+      // If the generated password makes it through the validation gauntlet, return it.
       return password;
     }
     return password;
