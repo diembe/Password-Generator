@@ -191,7 +191,7 @@ function writePassword() {
 
 
         if (passwordLowercase === lowercaseNegative) {
-          console.log("No lower case;");
+          console.log("No lowercase--regenerating new password.");
           confirmPassword();
         }
       }
@@ -210,7 +210,7 @@ function writePassword() {
 
 
         if (passwordUppercase === uppercaseNegative) {
-          console.log("No lower case;");
+          console.log("No uppercase--regenerating new password.");
           confirmPassword();
         }
       }
@@ -230,7 +230,7 @@ function writePassword() {
 
 
         if (passwordNumeric === numericNegative) {
-          console.log("No numeric characters;");
+          console.log("No numeric characters--regenerating new password.");
           confirmPassword();
         }
       }
@@ -250,7 +250,7 @@ function writePassword() {
 
 
         if (passwordSpecial === specialNegative) {
-          console.log("No special characters;");
+          console.log("No special characters--regenerating new password.");
           confirmPassword();
         }
       }
